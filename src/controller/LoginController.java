@@ -21,7 +21,7 @@ public class LoginController implements ActionListener {
     private LoginService loginService;
     private TimerController telaPrincipal;
     private RegisterController telaDeCadastro;
-    private PasswordRecoveryView pr;
+    private RecoveryController telaRecuperarSenha;
 
     
     public LoginController() {
@@ -49,8 +49,8 @@ public class LoginController implements ActionListener {
             telaDeCadastro = new RegisterController();
         }
         else if(evento.getSource().equals(telaLogin.getBtnPasswordRecover())){
-            pr = new PasswordRecoveryView();
-            pr.setVisible(true);
+            telaLogin.dispose();
+            telaRecuperarSenha = new RecoveryController();
         }
     }
 

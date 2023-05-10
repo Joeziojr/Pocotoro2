@@ -102,7 +102,7 @@ public class RecoveryService {
             
             Address[] toUser = InternetAddress.parse(this.user.getEmail());
         
-            msg.setRecipient(Message.RecipientType.TO, toUser);
+          //  msg.setRecipient(Message.RecipientType.TO, toUser);
             msg.setSubject("Pocotoro: Recuperação de Senha");
             msg.setText("Seu código de recuperação é: " + this.recoveryCode);
             

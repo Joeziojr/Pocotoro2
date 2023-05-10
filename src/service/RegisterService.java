@@ -49,18 +49,21 @@ public class RegisterService {
     
     public boolean validarCampos(){
         
+        char[] senha = this.registerView.getTxtPassword().getPassword();
+        char[] recuperar = this.registerView.getTxtPasswordConfirm().getPassword();
+        
         
         if ((this.registerView.getTxtEmail().getText().equals("") == false) &&
             (this.registerView.getTxtName().getText().equals("") == false) &&
             (this.registerView.getTxtPassword().getText().equals("") == false) &&
-            (this.registerView.getTxtPasswordConfirm().getText().equals(this.registerView.getTxtPassword().getText()))){
+            (senha == recuperar)){
             return true;
             
         }
         else if((this.registerView.getTxtEmail().getText().equals("") == false) &&
                 (this.registerView.getTxtName().getText().equals("") == false) &&
                 (this.registerView.getTxtPassword().getText().equals("") == false) &&
-                (this.registerView.getTxtPasswordConfirm().getText().equals(this.registerView.getTxtPassword().getText()) == false)){
+                (senha != recuperar)){
             JOptionPane.showMessageDialog(registerView, "senhas não coincidem");
             return false;
         }else{

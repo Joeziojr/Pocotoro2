@@ -121,7 +121,18 @@ public class LoginView extends javax.swing.JFrame {
 
         txtPassword.setBackground(new java.awt.Color(220, 224, 217));
         txtPassword.setForeground(new java.awt.Color(235, 81, 96));
+        txtPassword.setText("00000000000000");
         txtPassword.setBorder(null);
+        txtPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPasswordMouseClicked(evt);
+            }
+        });
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -195,6 +206,14 @@ public class LoginView extends javax.swing.JFrame {
     private void btnPasswordRecoverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPasswordRecoverMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPasswordRecoverMouseEntered
+
+    private void txtPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseClicked
+        getTxtPassword().setText("");
+    }//GEN-LAST:event_txtPasswordMouseClicked
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     /**
      * @param args the command line arguments
