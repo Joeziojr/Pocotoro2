@@ -74,6 +74,8 @@ public class PasswordRecoveryView extends javax.swing.JFrame {
         jLabel1.setText("Código de recuperação:");
 
         txtRecoveryCode.setBackground(new java.awt.Color(220, 224, 217));
+        txtRecoveryCode.setForeground(new java.awt.Color(235, 81, 96));
+        txtRecoveryCode.setBorder(null);
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel2.setText("Nova Senha:");

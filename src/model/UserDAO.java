@@ -40,7 +40,7 @@ public class UserDAO {
     }
     
     
-     public User pesquisarPorEmail(String email, String name, String password) {
+    public User pesquisarPorEmail(String email, String name, String password) {
         String sql = "SELECT * FROM user WHERE email = ? OR name = ? AND password = ?";
         User user = new User();
         
@@ -72,9 +72,41 @@ public class UserDAO {
         
         return user; 
     }
+    
+    //pesquisa um usuario apenas a partir do nome ou email, sem a senha
+    public User pesquisarUser(String name, String email){
+        String sql = "SELECT * FROM user WHERE name = ? OR email = ?";
+        
+        User user = new User();
+        user.setName("");
+        user.setEmail("");
+        
+        PreparedStatement pst;
+        ResultSet rs;
+        
+        try{
+            
+            pst = Conexao.getConexao().prepareStatement(sql);
+            pst.setString(1, name);
+            rs = pst.executeQuery();
+            
+            while(rs.next()){
+                user.setName(rs.getString("name"));
+                user.setEmail(rs.getString("email"));
+            }
+            
+            rs.close();
+            pst.close();
+            
+            
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return user;
+    } 
      
      
-     public boolean alterarSenha(User user){
+    public boolean alterarSenha(User user){
         
         String sql = "UPDATE user SET password = ? WHERE email = ?";
         
