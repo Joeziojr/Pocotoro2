@@ -74,12 +74,12 @@ public class UserDAO {
     }
     
     //pesquisa um usuario apenas a partir do nome ou email, sem a senha
-    public User pesquisarUser(String name, String email){
-        String sql = "SELECT * FROM user WHERE name = ? OR email = ?";
+    public User pesquisarUser(String name){
+        String sql = "SELECT * FROM user WHERE name = ?";
         
         User user = new User();
         user.setName("");
-        user.setEmail("");
+        //user.setEmail("");
         
         PreparedStatement pst;
         ResultSet rs;
@@ -92,7 +92,7 @@ public class UserDAO {
             
             while(rs.next()){
                 user.setName(rs.getString("name"));
-                user.setEmail(rs.getString("email"));
+                //user.setEmail(rs.getString("email"));
             }
             
             rs.close();

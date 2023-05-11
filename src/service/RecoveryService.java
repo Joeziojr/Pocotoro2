@@ -5,6 +5,7 @@
 package service;
 
 import java.util.Properties;
+import java.util.Set;
 import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -19,6 +20,7 @@ import model.User;
 import model.UserDAO;
 import view.RequestCodeView;
 import view.PasswordRecoveryView;
+import javax.activation.DataHandler;
 
 /**
  *
@@ -29,8 +31,10 @@ public class RecoveryService {
     private PasswordRecoveryView passwordRecoveryView;
     private RequestCodeView requestCodeView;
     private final UserDAO userDAO;
-    private User user;
+    //private User user;
     private int recoveryCode;
+    
+    User user = new User();
 
     public RecoveryService(PasswordRecoveryView passwordRecoveryView, RequestCodeView requestCodeView) {
         this.passwordRecoveryView = passwordRecoveryView;
@@ -44,7 +48,7 @@ public class RecoveryService {
         //User user = new User();
         this.user.setName(this.requestCodeView.getTxtName().getText());
         this.user.setEmail(this.requestCodeView.getTxtName().getText());
-        this.user = userDAO.pesquisarUser(this.user.getName(), this.user.getEmail());
+        this.user = userDAO.pesquisarUser(this.user.getName());
         
         if(this.user.getName().equals(this.requestCodeView.getTxtName().getText()) || 
                 this.user.getEmail().equals(this.requestCodeView.getTxtName().getText())){
@@ -78,31 +82,26 @@ public class RecoveryService {
     public void enviarCodigoPorEmail(){
         
         Properties prop = new Properties();
-        /** Parâmetros de conexão com servidor Yahoo */
-        prop.put("mail.smtp.host", "smtp.mail.yahoo.com");
+        /** Parâmetros de conexão com servidor gmail*/
+        prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.socketFactory.port", "465");
         prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.port", "25");
-        
+        prop.put("mail.smtp.port", "465");
         Session session = Session.getDefaultInstance(prop,
                 new Authenticator(){
                     @Override
                     protected PasswordAuthentication getPasswordAuthentication(){
-                        return new PasswordAuthentication("pocotoroteam@yahoo.com", "pocotopocotopocoto");
+                        return new PasswordAuthentication("pocotoroconfig@gmail.com", "bhfdrrbgofusxzyx");
                     }
                 });
         
         session.setDebug(true);
         
         try{
-            
             Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress("pocotoroteam@yahoo.com"));
-            
-            Address[] toUser = InternetAddress.parse(this.user.getEmail());
-        
-          //  msg.setRecipient(Message.RecipientType.TO, toUser);
+            msg.setFrom(new InternetAddress("pocotoroconfig@gmail.com"));
+            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(this.user.getEmail()));
             msg.setSubject("Pocotoro: Recuperação de Senha");
             msg.setText("Seu código de recuperação é: " + this.recoveryCode);
             
@@ -111,6 +110,37 @@ public class RecoveryService {
             System.out.println("Código Enviado");
         } catch(MessagingException e){
             throw new RuntimeException(e);
+        }
+    }
+    
+    
+    public void redefinirSenha(){
+     
+        if(passwordRecoveryView.getTxtRecoveryCode().equals("")){
+            JOptionPane.showMessageDialog(passwordRecoveryView, "Informe o código de recuperação", "Erro", 0);
+        } else {
+            int codigo = Integer.parseInt(passwordRecoveryView.getTxtRecoveryCode().getText());
+            
+            if(this.recoveryCode == codigo){
+                
+                if(passwordRecoveryView.getTxtNewPassword().getText().equals("") || passwordRecoveryView.getTxtPasswordConfirm().getText().equals("")){
+                    
+                    JOptionPane.showMessageDialog(requestCodeView, "Por favor, preencha todos os campos.");
+                
+                } else if(passwordRecoveryView.getTxtNewPassword().getText().equals(passwordRecoveryView.getTxtPasswordConfirm().getText())){
+                    
+                    String usuario = this.user.getName();
+                    this.user = new User();
+                    user.setName(usuario);
+                    user.setPassword(passwordRecoveryView.getTxtNewPassword().getText());
+                    userDAO.alterarSenha(user);
+                    
+                    JOptionPane.showMessageDialog(requestCodeView, "Senha redefinida com sucesso!");
+                    passwordRecoveryView.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(requestCodeView, "Senhas não conferem", "Erro", 0);
+                }
+            }
         }
     }
 }

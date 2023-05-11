@@ -36,17 +36,16 @@ public class RecoveryController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent evento) {
         if (evento.getSource().equals(requestCodeView.getBtnSendCode())){
-           // servico.enviarCodigo();
-            requestCodeView.dispose();
-            telaRecuperarSenha.setVisible(true);
+            servico.enviarCodigo();
+            //requestCodeView.dispose();
+            //telaRecuperarSenha.setVisible(true);
             
         }else if(evento.getSource().equals(requestCodeView.getBtnCancel())){
             requestCodeView.dispose();
             telaLogin = new LoginController();
             
         }else if (evento.getSource().equals(telaRecuperarSenha.getBtnReset())){
-           //A ser desenvolvido
-            
+            servico.redefinirSenha();
         }
         
     }
