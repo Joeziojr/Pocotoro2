@@ -30,11 +30,13 @@ public class LoginService {
             User us = userDAO.pesquisarPorEmail(loginView.getTxtName().getText(),
                     loginView.getTxtName().getText(), loginView.getTxtPassword().getText());
             if(us.getId() > 0){
-                System.out.println(us.getPassword());
                 return true;
             }
+            if(us.getId() == 0){
+                JOptionPane.showMessageDialog(loginView, "User não cadastrado");
+                return false;
+            }
         }
-        System.out.println("User não cadastrado");
         return false;
     }
     
@@ -43,6 +45,7 @@ public class LoginService {
         if (this.loginView.getTxtName().getText().equals("") || (this.loginView.getTxtPassword().getText().equals(""))){
             JOptionPane.showMessageDialog(loginView, "Há campos vazios");
             return false;
+            //Implementar lógica aqui
         }
         else{
             return true;

@@ -6,6 +6,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import service.RecoveryService;
 import view.PasswordRecoveryView;
 import view.RequestCodeView;
@@ -36,16 +37,20 @@ public class RecoveryController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent evento) {
         if (evento.getSource().equals(requestCodeView.getBtnSendCode())){
-            servico.enviarCodigo();
-            //requestCodeView.dispose();
-            //telaRecuperarSenha.setVisible(true);
+            //servico.enviarCodigo();
+            requestCodeView.dispose();
+            telaRecuperarSenha.setVisible(true);
             
         }else if(evento.getSource().equals(requestCodeView.getBtnCancel())){
             requestCodeView.dispose();
             telaLogin = new LoginController();
             
         }else if (evento.getSource().equals(telaRecuperarSenha.getBtnReset())){
-            servico.redefinirSenha();
+            JOptionPane.showMessageDialog(null, "Senha redefinida com sucesso \n" + "É o que aparecerá, assim que tivermos implementado esta função");
+            telaRecuperarSenha.dispose();
+            telaLogin = new LoginController();
+            
+           //servico.redefinirSenha();
         }
         
     }

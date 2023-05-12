@@ -49,28 +49,28 @@ public class RegisterService {
     
     public boolean validarCampos(){
         
-        char[] senha = this.registerView.getTxtPassword().getPassword();
-        char[] recuperar = this.registerView.getTxtPasswordConfirm().getPassword();
+        String senha = String.valueOf(this.registerView.getTxtPassword().getPassword());
+        String senhaConf = String.valueOf(this.registerView.getTxtPasswordConfirm().getPassword());
+        boolean isIt = false;
         
         
         if ((this.registerView.getTxtEmail().getText().equals("") == false) &&
             (this.registerView.getTxtName().getText().equals("") == false) &&
-            (this.registerView.getTxtPassword().getText().equals("") == false) &&
-            (senha == recuperar)){
-            return true;
+            (senha.equals("") == false)){
+            
+            if(senha.equals(senhaConf)){
+                isIt = true;
+            }else if(senha.equals(senhaConf) == false){
+                JOptionPane.showMessageDialog(registerView, "Senhas não coincidem");
+                isIt = false;
+            }
             
         }
-        else if((this.registerView.getTxtEmail().getText().equals("") == false) &&
-                (this.registerView.getTxtName().getText().equals("") == false) &&
-                (this.registerView.getTxtPassword().getText().equals("") == false) &&
-                (senha != recuperar)){
-            JOptionPane.showMessageDialog(registerView, "senhas não coincidem");
-            return false;
-        }else{
+        else{
             JOptionPane.showMessageDialog(registerView, "Há campos vazios");
-            return false;
+            isIt = false;
         }
-        
+        return isIt;
     }
     
     

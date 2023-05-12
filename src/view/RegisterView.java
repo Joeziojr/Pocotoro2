@@ -42,7 +42,7 @@ public class RegisterView extends javax.swing.JDialog {
     }
 
     public JPasswordField getTxtPassword() {
-        return txtPasswordConfirm;
+        return txtPassword;
     }
 
     public JPasswordField getTxtPasswordConfirm() {
@@ -134,7 +134,13 @@ public class RegisterView extends javax.swing.JDialog {
 
         txtPasswordConfirm.setBackground(new java.awt.Color(220, 224, 217));
         txtPasswordConfirm.setForeground(new java.awt.Color(235, 81, 96));
+        txtPasswordConfirm.setText("00000000000000");
         txtPasswordConfirm.setBorder(null);
+        txtPasswordConfirm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPasswordConfirmMouseClicked(evt);
+            }
+        });
         txtPasswordConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordConfirmActionPerformed(evt);
@@ -143,7 +149,13 @@ public class RegisterView extends javax.swing.JDialog {
 
         txtPassword.setBackground(new java.awt.Color(220, 224, 217));
         txtPassword.setForeground(new java.awt.Color(235, 81, 96));
+        txtPassword.setText("00000000000000");
         txtPassword.setBorder(null);
+        txtPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPasswordMouseClicked(evt);
+            }
+        });
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
@@ -231,6 +243,14 @@ public class RegisterView extends javax.swing.JDialog {
     private void txtPasswordConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordConfirmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordConfirmActionPerformed
+
+    private void txtPasswordConfirmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordConfirmMouseClicked
+        this.getTxtPasswordConfirm().setText("");
+    }//GEN-LAST:event_txtPasswordConfirmMouseClicked
+
+    private void txtPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPasswordMouseClicked
+        this.getTxtPassword().setText("");
+    }//GEN-LAST:event_txtPasswordMouseClicked
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:

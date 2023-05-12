@@ -13,6 +13,7 @@ import view.ConfigView;
 public class TimerController implements ActionListener{
     //atributos
     MainView mainView;
+    LoginController loginView;
     ConfigView configView;
     ServicePomodoroTimer spt;
     int duracaoPomodoro, duracaoSB, duracaoLB, intervalLB;
@@ -55,6 +56,8 @@ public class TimerController implements ActionListener{
             //mainView.getBtnStart().setEnabled(true);
         }
         if (ae.getSource().equals(mainView.getBtnLogin())) {
+            this.mainView.dispose();
+            this.loginView = new LoginController();
         }
         
         if(ae.getSource().equals(mainView.getBtnReset())){

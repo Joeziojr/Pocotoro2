@@ -20,7 +20,7 @@ import model.User;
 import model.UserDAO;
 import view.RequestCodeView;
 import view.PasswordRecoveryView;
-import javax.activation.DataHandler;
+//import javax.activation.DataHandler;
 
 /**
  *
